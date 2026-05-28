@@ -21,7 +21,6 @@ import { debounceTime } from 'rxjs/operators';
 
 import * as L from 'leaflet';
 (window as any).L = L;
-import 'leaflet.markercluster';
 
 @Component({
   selector: 'app-search-component',
