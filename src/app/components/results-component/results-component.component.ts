@@ -18,7 +18,7 @@ import { EmtServiceService } from '../../services/emt-service.service';
 import { ValenciaServiceService } from '../../services/valencia-service.service';
 
 import * as L from 'leaflet';
-import 'leaflet.markercluster';
+import 'leaflet.markercluster/dist/leaflet.markercluster';
 const Lany = L as any;
 
 @Component({

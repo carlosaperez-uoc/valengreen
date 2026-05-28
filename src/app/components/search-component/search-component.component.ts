@@ -20,7 +20,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { debounceTime } from 'rxjs/operators';
 
 import * as L from 'leaflet';
-import 'leaflet.markercluster';
+import 'leaflet.markercluster/dist/leaflet.markercluster';
 const Lany = L as any;
 
 @Component({
