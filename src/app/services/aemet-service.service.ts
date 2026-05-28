@@ -7,7 +7,7 @@ import { switchMap, map } from 'rxjs';
 })
 export class AemetServiceService {
 
-  private api = 'http://localhost:3000/aemet/';
+  private api = 'https://api-valengreen.onrender.com/aemet/';
 
   constructor(private http: HttpClient) { }
 
