@@ -20,7 +20,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { debounceTime } from 'rxjs/operators';
 
 import * as L from 'leaflet';
-(window as any).L = L;
+import 'leaflet.markercluster';
+const Lany = L as any;
 
 @Component({
   selector: 'app-search-component',
@@ -199,8 +200,8 @@ export class SearchComponentComponent implements AfterViewInit {
   }
 
   getAparcamientos(){
-    const clustersAparcamiento = L.markerClusterGroup(); //Cluster aparcamiento 
-    const clustersValenBisi = L.markerClusterGroup(); // Cluster valenbisi
+    const clustersAparcamiento = (L as any).markerClusterGroup(); //Cluster aparcamiento 
+    const clustersValenBisi = (L as any).markerClusterGroup(); // Cluster valenbisi
 
     this.valencia.getAparcamientos().subscribe((res: any) => { //LLamada al service donde devuelve aparcamientos
       const aparcamientoLayer = L.geoJSON(res, { //capa de aparcamiento

@@ -18,7 +18,8 @@ import { EmtServiceService } from '../../services/emt-service.service';
 import { ValenciaServiceService } from '../../services/valencia-service.service';
 
 import * as L from 'leaflet';
-(window as any).L = L;
+import 'leaflet.markercluster';
+const Lany = L as any;
 
 @Component({
   selector: 'app-results-component',
@@ -49,9 +50,9 @@ export class ResultsComponentComponent {
   origen = '';
   destino = '';
 
-  clustersAparcamiento = L.markerClusterGroup();
-  clustersValenBisi1 = L.markerClusterGroup();
-  clustersValenBisi2 = L.markerClusterGroup();
+  clustersAparcamiento = (L as any).markerClusterGroup();
+  clustersValenBisi1 = (L as any).markerClusterGroup();
+  clustersValenBisi2 = (L as any).markerClusterGroup();
 
   map1_total = 0;
   map2_total = 0;
@@ -235,7 +236,7 @@ export class ResultsComponentComponent {
   }
 
   getAparcamientos(){
-      this.clustersAparcamiento = L.markerClusterGroup(); //Cluster aparcamiento 
+      this.clustersAparcamiento = (L as any).markerClusterGroup(); //Cluster aparcamiento 
       const centroMapa = this.map3.getCenter();
       this.valencia.getAparcamientos().subscribe((res: any) => { //LLamada al service donde devuelve aparcamientos
         this.res_map3 = res;
@@ -339,7 +340,7 @@ export class ResultsComponentComponent {
   }
 
   getValenBisi(){
-      this.clustersValenBisi1 = L.markerClusterGroup(); // Cluster valenbisi
+      this.clustersValenBisi1 = (L as any).markerClusterGroup(); // Cluster valenbisi
       const centroMapa1 = this.map1.getCenter();
       const centroMapa2 = this.map2.getCenter();
   
@@ -368,7 +369,7 @@ export class ResultsComponentComponent {
         this.clustersValenBisi1.addTo(this.map1);
       });
 
-      this.clustersValenBisi2 = L.markerClusterGroup(); // Cluster valenbisi
+      this.clustersValenBisi2 = (L as any).markerClusterGroup(); // Cluster valenbisi
   
       this.valencia.getValenBisi().subscribe((res: any) => {
         this.res_map2 = res;
