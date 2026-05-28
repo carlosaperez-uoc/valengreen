@@ -18,10 +18,7 @@ import { EmtServiceService } from '../../services/emt-service.service';
 import { ValenciaServiceService } from '../../services/valencia-service.service';
 
 import * as L from 'leaflet';
-
 import 'leaflet.markercluster';
-
-const Lany = L as any;
 
 @Component({
   selector: 'app-results-component',
@@ -32,6 +29,7 @@ const Lany = L as any;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResultsComponentComponent {
+  private leaflet = window.L;
   color_class = 'bueno';
   puntos = 0;
   tipo = 0;
@@ -52,9 +50,9 @@ export class ResultsComponentComponent {
   origen = '';
   destino = '';
 
-  clustersAparcamiento = Lany.markerClusterGroup();;
-  clustersValenBisi1 = Lany.markerClusterGroup();;
-  clustersValenBisi2 = Lany.markerClusterGroup();;
+  clustersAparcamiento = this.leaflet.markerClusterGroup();
+  clustersValenBisi1 = this.leaflet.markerClusterGroup();
+  clustersValenBisi2 = this.leaflet.markerClusterGroup();
 
   map1_total = 0;
   map2_total = 0;
@@ -238,7 +236,7 @@ export class ResultsComponentComponent {
   }
 
   getAparcamientos(){
-      this.clustersAparcamiento = Lany.markerClusterGroup();; //Cluster aparcamiento 
+      this.clustersAparcamiento = this.leaflet.markerClusterGroup(); //Cluster aparcamiento 
       const centroMapa = this.map3.getCenter();
       this.valencia.getAparcamientos().subscribe((res: any) => { //LLamada al service donde devuelve aparcamientos
         this.res_map3 = res;
@@ -342,7 +340,7 @@ export class ResultsComponentComponent {
   }
 
   getValenBisi(){
-      this.clustersValenBisi1 = Lany.markerClusterGroup();; // Cluster valenbisi
+      this.clustersValenBisi1 = this.leaflet.markerClusterGroup(); // Cluster valenbisi
       const centroMapa1 = this.map1.getCenter();
       const centroMapa2 = this.map2.getCenter();
   
@@ -371,7 +369,7 @@ export class ResultsComponentComponent {
         this.clustersValenBisi1.addTo(this.map1);
       });
 
-      this.clustersValenBisi2 = Lany.markerClusterGroup();; // Cluster valenbisi
+      this.clustersValenBisi2 = this.leaflet.markerClusterGroup(); // Cluster valenbisi
   
       this.valencia.getValenBisi().subscribe((res: any) => {
         this.res_map2 = res;
