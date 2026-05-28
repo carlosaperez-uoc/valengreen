@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 })
 export class UserServiceService {
 
-  private api = 'https://api-valengreen.onrender.com/';
+  private api = 'https://api-valengreen.onrender.com';
 
   private token = '';
   private usuario = '';
