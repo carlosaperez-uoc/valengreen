@@ -1,0 +1,84 @@
+<div id="main">
+    <div id="top">
+        <app-header-component></app-header-component>
+        <button mat-raised-button class="primary-200" (click)="nueva();"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="m330-444 201 201-51 51-288-288 288-288 51 51-201 201h438v72H330Z"/></svg>Nueva búsqueda</button>
+        <br>
+        <form>
+            <mat-form-field >
+                <mat-label>Origen</mat-label>
+                <input type="text" matInput disabled id="origen">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Destino</mat-label>
+                <input type="text" matInput disabled id="destino">
+            </mat-form-field>
+        </form>
+        <mat-card class="transport" appearance="outlined">
+            <div><mat-checkbox [(ngModel)]="walk" (ngModelChange)="enableDisable(1)" id="check_1"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="m280-40 112-564-72 28v136h-80v-188l202-86q14-6 29.5-7t29.5 4q14 5 26.5 14t20.5 23l40 64q26 42 70.5 69T760-520v80q-70 0-125-29t-94-74l-25 123 84 80v300h-80v-260l-84-64-72 324h-84Zm203.5-723.5Q460-787 460-820t23.5-56.5Q507-900 540-900t56.5 23.5Q620-853 620-820t-23.5 56.5Q573-740 540-740t-56.5-23.5Z"/></svg></mat-checkbox></div>
+            <div><mat-checkbox [(ngModel)]="bike" (ngModelChange)="enableDisable(2)" id="check_2"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M200-160q-85 0-142.5-57.5T0-360q0-85 58.5-142.5T200-560q77 0 129.5 46T396-400h26l-72-200h-70v-80h200v80h-44l14 40h192l-58-160H480v-80h104q26 0 46.5 14t29.5 38l68 186h32q83 0 141.5 58.5T960-362q0 84-58 143t-142 59q-72 0-126.5-45T564-320H396q-14 69-68 114.5T200-160Zm0-80q41 0 70.5-22.5T312-320H200v-80h112q-12-36-41.5-58T200-480q-51 0-85.5 34.5T80-360q0 50 34.5 85t85.5 35Zm308-160h56q5-23 13.5-43t22.5-37H478l30 80Zm252 160q51 0 85.5-35t34.5-85q0-51-34.5-85.5T760-480h-4l40 106-76 28-38-106q-20 17-31 40t-11 52q0 50 34.5 85t85.5 35ZM196-360Zm564 0Z"/></svg></mat-checkbox></div>
+            <div><mat-checkbox [(ngModel)]="bus" (ngModelChange)="enableDisable(3)" id="check_3"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M240-120q-17 0-28.5-11.5T200-160v-82q-18-20-29-44.5T160-340v-380q0-83 77-121.5T480-880q172 0 246 37t74 123v380q0 29-11 53.5T760-242v82q0 17-11.5 28.5T720-120h-40q-17 0-28.5-11.5T640-160v-40H320v40q0 17-11.5 28.5T280-120h-40Zm242-640h224-448 224Zm158 280H240h480-80Zm-400-80h480v-120H240v120Zm142.5 222.5Q400-355 400-380t-17.5-42.5Q365-440 340-440t-42.5 17.5Q280-405 280-380t17.5 42.5Q315-320 340-320t42.5-17.5Zm280 0Q680-355 680-380t-17.5-42.5Q645-440 620-440t-42.5 17.5Q560-405 560-380t17.5 42.5Q595-320 620-320t42.5-17.5ZM258-760h448q-15-17-64.5-28.5T482-800q-107 0-156.5 12.5T258-760Zm62 480h320q33 0 56.5-23.5T720-360v-120H240v120q0 33 23.5 56.5T320-280Z"/></svg></mat-checkbox></div>
+            <div><mat-checkbox [(ngModel)]="car" (ngModelChange)="enableDisable(4)" id="check_4"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000"><path d="M240-200v40q0 17-11.5 28.5T200-120h-40q-17 0-28.5-11.5T120-160v-320l84-240q6-18 21.5-29t34.5-11h440q19 0 34.5 11t21.5 29l84 240v320q0 17-11.5 28.5T800-120h-40q-17 0-28.5-11.5T720-160v-40H240Zm-8-360h496l-42-120H274l-42 120Zm-32 80v200-200Zm100 160q25 0 42.5-17.5T360-380q0-25-17.5-42.5T300-440q-25 0-42.5 17.5T240-380q0 25 17.5 42.5T300-320Zm360 0q25 0 42.5-17.5T720-380q0-25-17.5-42.5T660-440q-25 0-42.5 17.5T600-380q0 25 17.5 42.5T660-320Zm-460 40h560v-200H200v200Z"/></svg></mat-checkbox></div>
+        </mat-card>
+    </div>
+    <div>
+        <p><strong>Mejores resultados:</strong></p>
+    </div>
+    <div id="results">
+        <mat-card id="1" appearance="outlined" [class]="walk_class">
+            <mat-card-header>
+              <mat-card-title-group>
+                @if(walk_error.length > 1){
+                    <mat-card-title>{{walk_error}}</mat-card-title>
+                } @else {
+                    <mat-card-title>{{walk_time}} minutos</mat-card-title>
+                }
+                <mat-card-subtitle>A pie</mat-card-subtitle>
+            </mat-card-title-group> 
+            <span class="points">+{{walk_points}}p</span> 
+            <button mat-fab (click)="saveResult(1)"><mat-icon>play_circle</mat-icon></button>        
+            </mat-card-header>
+        </mat-card>
+        <mat-card id="2" appearance="outlined" [class]="bike_class">
+            <mat-card-header>
+              <mat-card-title-group>
+                @if(bike_error.length > 1){
+                    <mat-card-title>{{bike_error}}</mat-card-title>
+                } @else {
+                    <mat-card-title>{{bike_time}} minutos</mat-card-title>
+                }
+                <mat-card-subtitle>Bicicleta</mat-card-subtitle>
+            </mat-card-title-group> 
+            <span class="points">+{{bike_points}}p</span> 
+            <button mat-fab (click)="saveResult(2)"><mat-icon>play_circle</mat-icon></button>        
+            </mat-card-header>
+        </mat-card>
+        <mat-card id="3" appearance="outlined" [class]="bus_class">
+            <mat-card-header>
+              <mat-card-title-group>
+                @if(bus_error.length > 1){
+                    <mat-card-title>{{bus_error}}</mat-card-title>
+                } @else {
+                    <mat-card-title>{{bus_time}} minutos</mat-card-title>
+                }
+                <mat-card-subtitle>Autobús</mat-card-subtitle>
+            </mat-card-title-group> 
+            <span class="points">+{{bus_points}}p</span> 
+            <button mat-fab (click)="saveResult(3)"><mat-icon>play_circle</mat-icon></button>        
+            </mat-card-header>
+        </mat-card>
+        <mat-card id="4" appearance="outlined" [class]="car_class">
+            <mat-card-header>
+              <mat-card-title-group>
+                @if(car_error.length > 1){
+                    <mat-card-title>{{car_error}}</mat-card-title>
+                } @else {
+                    <mat-card-title>{{car_time}} minutos</mat-card-title>
+                }
+                <mat-card-subtitle>En coche</mat-card-subtitle>
+            </mat-card-title-group> 
+            <span class="points">{{car_points}}p</span> 
+            <button mat-fab (click)="saveResult(4)"><mat-icon>play_circle</mat-icon></button>        
+            </mat-card-header>
+        </mat-card>
+    </div>
+</div>

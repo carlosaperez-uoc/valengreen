@@ -1,0 +1,42 @@
+div{
+    padding: 1em;
+}
+
+button.primary-200 {
+    background-color: #dedae7;
+    color: black;
+}
+
+button svg {
+    vertical-align: middle;
+    margin-right: 8px;
+    margin-bottom: 2px;
+}
+
+.center{
+    text-align: center;
+}
+
+#cerrar{
+    text-align: center;
+}
+
+@media (min-width: 1200px) {
+    #main{
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    #content{
+        display: flex;
+        margin: 0 auto;
+        max-width: 600px;
+        width: 100%;
+    }
+
+    #content>div:last-of-type{
+        width: 50%;
+        text-align: right;
+        align-content: center;
+    }
+}

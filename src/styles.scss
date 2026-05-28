@@ -1,1 +1,178 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@import "leaflet/dist/leaflet.css";
+@import "leaflet.markercluster/dist/MarkerCluster.css";
+@import "leaflet.markercluster/dist/MarkerCluster.Default.css";
+
+/* These palettes are generated using https://themes.angular-material.dev/ */
+
+$m2-primary: (
+    50 : #ece9f3,
+    100 : #cec7e2,
+    200 : #aea2cf,
+    300 : #8e7dbb,
+    400 : #7561ad,
+    500 : #5d459e,
+    600 : #553e96,
+    700 : #4b368c,
+    800 : #412e82,
+    900 : #301f70,
+    A100 : #dadaff,
+    A200 : #a7a8ff,
+    A400 : #7475ff,
+    A700 : #5a5cff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #ffffff,
+    )
+);
+
+$m2-accent: (
+    50 : #f2e8ef,
+    100 : #dfc6d7,
+    200 : #c9a0bc,
+    300 : #b379a1,
+    400 : #a35d8c,
+    500 : #934078,
+    600 : #8b3a70,
+    700 : #803265,
+    800 : #762a5b,
+    900 : #641c48,
+    A100 : #ffb7f0,
+    A200 : #ff84e6,
+    A400 : #ff51db,
+    A700 : #ff37d6,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$m2-error: (
+    50 : #f7e4e4,
+    100 : #eababa,
+    200 : #dd8d8d,
+    300 : #cf5f5f,
+    400 : #c43c3c,
+    500 : #ba1a1a,
+    600 : #b31717,
+    700 : #ab1313,
+    800 : #a30f0f,
+    900 : #940808,
+    A100 : #ffd5dd,
+    A200 : #ffa2b4,
+    A400 : #ff6f8a,
+    A700 : #ff5576,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #ffffff,
+        500 : #ffffff,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+
+
+$my-primary: mat.define-palette($m2-primary);
+$my-accent: mat.define-palette($m2-accent, A200, A100, A400);
+$my-warn: mat.define-palette($m2-error);
+
+$my-theme: mat.define-light-theme((
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+));
+
+$my-dark-theme: mat.define-dark-theme((
+    color: (
+      primary: $my-primary,
+      accent: $my-accent,
+      warn: $my-warn,
+    ),
+));
+
+@include mat.core();
+@include mat.all-component-themes($my-theme);
+
+.dark {
+    @include mat.all-component-colors($my-dark-theme);
+}
+
+html, body { 
+    height: 100%; 
+}
+
+body { 
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.mat-mdc-button, 
+.mat-mdc-raised-button, 
+.mat-mdc-unelevated-button, 
+.mat-mdc-outlined-button {
+    border-radius: 100px !important;
+    height: 40px !important;
+    padding: 0 24px !important;
+    letter-spacing: 0.1px !important;
+}
+
+.mat-mdc-form-field {
+    --mdc-filled-tonal-container-shape: 28px;
+    --mdc-outlined-container-shape: 28px;
+}
+
+.mdc-text-field--filled{
+    border-radius: 50px!important;
+}
+
+.mat-mdc-form-field {
+    .mdc-line-ripple {
+      display: none !important;
+    }
+  }
+  
+  .mat-mdc-form-field-focus-indicator {
+    display: none !important;
+  }
+
+  .mat-button-toggle-checked {
+    background-color: #dedae7 !important;
+  }

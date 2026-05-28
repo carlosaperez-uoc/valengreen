@@ -1,0 +1,33 @@
+<div>
+    <img src="../../../assets/valengreen.png" alt="Logo ValenGreen">
+</div>
+<form (ngSubmit)="register()">
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <input type="text" matInput [formControl]="user" required>
+      @if (user.hasError('required')) {
+        <mat-error>El usuario es obligatorio</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input type="password" matInput [formControl]="pass" required>
+      @if (pass.hasError('required')) {
+        <mat-error>La constraseña es obligatoria</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Repite tu contraseña</mat-label>
+      <input type="password" matInput [formControl]="pass2" required>
+      @if (pass2.hasError('required')) {
+        <mat-error>La constraseña es obligatoria</mat-error>
+      }
+      @if (pass2.hasError('error')) {
+        <mat-error>Las contraseñas no coinciden</mat-error>
+      }
+    </mat-form-field>
+  
+    <button mat-raised-button color="primary" type="submit">Registrarse</button>
+</form>

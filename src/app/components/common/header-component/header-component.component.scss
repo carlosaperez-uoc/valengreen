@@ -1,0 +1,31 @@
+button.primary-200 {
+    background-color: #bab2d3;
+    color: black;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+  
+header>div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+  
+header p {
+    margin: 0;
+}
+
+img{
+    display: none;
+}
+
+@media (min-width: 1200px) {
+    img{
+        display: block;
+    }
+}

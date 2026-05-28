@@ -1,0 +1,40 @@
+div{
+    text-align: center;
+}
+
+div:first-of-type{
+    margin-top: 2em;
+}
+
+img{
+    width: 70%;
+    max-width: 400px;
+}
+form{
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+
+    padding: 2em;
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+mat-form-field{
+    width: 100%;
+}
+
+button{
+    margin-top: 2em;
+}
+
+input{
+    border-radius: 50px;
+}
+
+button.primary-200 {
+    background-color: #bab2d3;
+    color: black;
+    margin-top: 0;
+}

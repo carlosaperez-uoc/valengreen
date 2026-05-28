@@ -1,0 +1,141 @@
+<app-header-component></app-header-component>
+<p id="boton_volver">
+    <button mat-raised-button class="primary-200" (click)="volver();"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="m330-444 201 201-51 51-288-288 288-288 51 51-201 201h438v72H330Z"/></svg>Volver</button>
+    <button class="submit_pc" mat-raised-button color="primary" (click)="saveRuta();">Realizar</button>
+</p>
+<div id="results">
+    <mat-card id="walk" appearance="outlined" [class]="color_class">
+        <mat-card-header>
+            <mat-card-title-group>
+                <mat-card-title>{{time}} minutos</mat-card-title>
+                <mat-card-subtitle>A pie</mat-card-subtitle>
+            </mat-card-title-group> 
+            @if(puntos < 0){
+                <span class="points">{{puntos}}p</span> 
+            } @else {
+                <span class="points">+{{puntos}}p</span> 
+            }
+        </mat-card-header>
+    </mat-card>
+    <div class="submit_pc">
+        @if(tipo == 2 || tipo == 3){
+            <p><strong>Tiempo total: </strong>{{time}}</p>
+            <p><strong>Distancia total: </strong>{{distance}}</p>
+            <p><strong>CO2: </strong>{{co2}}</p>
+        }
+    </div>
+    @if(tipo == 2){
+        <div id="eleccion">
+            <mat-button-toggle-group name="bicis" (change)="changeBicis($event.value)">
+                <mat-button-toggle value="valenbisi" [checked]="true">ValenBisi</mat-button-toggle>
+                <mat-button-toggle value="propia">Bici propia</mat-button-toggle>
+            </mat-button-toggle-group>
+        </div>
+        <div id="valenbisi">
+            <div id="radio_valenbisi">
+                <mat-form-field>
+                    <mat-label>Radio origen (m)</mat-label>
+                    <input id="map1_input" type="number" matInput placeholder="500" value="500" #radioInput1 (change)="updateValenBisiOrg(radioInput1.value)">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Radio destino (m)</mat-label>
+                    <input id="map2_input" type="number" matInput placeholder="500" value="500" #radioInput2 (change)="updateValenBisiDest(radioInput2.value)">
+                </mat-form-field>
+            </div>
+            <div id="mapas12">
+                <div>
+                    <p><strong>Disponibles: </strong>{{map1_total}}</p>
+                    <div id="map1"></div>
+                </div>
+                <div>
+                    <p><strong>Huecos libres: </strong>{{map2_total}}</p>
+                    <div id="map2"></div>
+                </div>
+                
+                
+                
+            </div>
+        </div>
+        <div id="propia">
+            <div id="radio_propia">
+                <mat-form-field>
+                    <mat-label>Radio destino (m)</mat-label>
+                    <input id="map3_input" type="number" matInput placeholder="500" value="500" #radioInput3 (change)="updateAparcamientos(radioInput3.value)">
+                </mat-form-field>
+            </div>
+            <p><strong>Aparcamientos a tu llegada: </strong>{{map3_total}}</p>
+            <div id="map3"></div>
+        </div>
+    } @else if(tipo ==3){
+        <div>
+            <p><strong>Rutas sugeridas:</strong></p>
+            <mat-accordion>
+            
+        @if(res.plan.itineraries.itinerary.length > 1){
+            
+            @for (item of res.plan.itineraries.itinerary; track item.duration){
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title> {{convertirTiempo(item.duration)}} minutos</mat-panel-title>
+                      <mat-panel-description> Transbordos: {{item.transfers}} </mat-panel-description>
+                    </mat-expansion-panel-header>
+                    <ul>
+                    @for (leg of item.legs.leg; track leg.duration){
+                        <li>
+                            @if(leg['@mode'] == "WALK"){
+                                <strong>Camina </strong>{{convertirTiempo(leg.duration)}} minutos hasta {{leg.to.name}}
+                            } @else{
+                                <strong>Bus {{leg['@route']}}: </strong> {{leg['@headsign']}}. 
+                                <ul>
+                                    <li><strong>{{leg.intermediateStops.stop.length}} paradas.</strong></li>
+                                    <li><strong>Bajar en: </strong>{{leg.to.name}}</li>
+                                </ul>
+                            }
+                        </li>
+                    } 
+                    </ul>
+                </mat-expansion-panel>
+            }
+        } @else{
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title> {{convertirTiempo(res.plan.itineraries.itinerary.duration)}} minutos</mat-panel-title>
+                  <mat-panel-description> Transbordos: {{res.plan.itineraries.itinerary.transfers}} </mat-panel-description>
+                </mat-expansion-panel-header>
+                <ul>
+                    @for (leg of res.plan.itineraries.itinerary.legs.leg; track leg.duration){
+                        <li>
+                            @if(leg['@mode'] == "WALK"){
+                                <strong>Camina </strong>{{convertirTiempo(leg.duration)}} minutos hasta {{leg.to.name}}
+                            } @else{
+                                <strong>Bus {{leg['@route']}}: </strong> {{leg['@headsign']}}. 
+                                <ul>
+                                    <li><strong>{{leg.intermediateStops.stop.length}} paradas.</strong></li>
+                                    <li><strong>Bajar en: </strong>{{leg.to.name}}</li>
+                                </ul>
+                            }
+                        </li>
+                    } 
+                </ul>
+            </mat-expansion-panel>
+        }
+            </mat-accordion>
+        </div>
+    } @else if(tipo == 4){
+        <div id="tipo_car">
+            <p><strong>¡Tu ruta es la más contaminante!</strong></p>
+            <p id="sad"><mat-icon>sentiment_very_dissatisfied</mat-icon></p>
+            <p>Esta ruta emitirá a la atmósfera <strong>{{this.co2}}</strong> gramos de CO2</p>
+            <p><strong>¡Considera alternativas más respetuosas!</strong></p>
+        </div>
+    }
+</div>
+<div id="submit">
+    @if(tipo == 2 || tipo == 3){
+        <p><strong>Tiempo total: </strong>{{time}}</p>
+        <p><strong>Distancia total: </strong>{{distance}}</p>
+        <p><strong>CO2: </strong>{{co2}}</p>
+    }
+    <button mat-raised-button color="primary" (click)="saveRuta();">Realizar</button>
+</div>
+

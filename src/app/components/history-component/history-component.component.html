@@ -1,0 +1,32 @@
+<div id="main">
+    <button mat-raised-button class="primary-200" (click)="volver();"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#000000"><path d="m330-444 201 201-51 51-288-288 288-288 51 51-201 201h438v72H330Z"/></svg>Volver</button>
+    <div class="center">
+        <p><strong>Historial de desplazamientos</strong></p>
+        
+    </div>
+    <div id="results">
+        @for (item of historial; track item.id){
+            <mat-card appearance="outlined" [class]="'clase_' + item.id_medio">
+                <mat-card-header>
+                  <mat-card-title-group>                    
+                    <mat-card-title>{{convertirFecha(item.date)}}</mat-card-title>
+                    @if(item.id_medio == 1){
+                        <mat-card-subtitle>A pie</mat-card-subtitle>
+                    } @else if(item.id_medio ==2){
+                        <mat-card-subtitle>Bicicleta</mat-card-subtitle>
+                    } @else if(item.id_medio == 3){
+                        <mat-card-subtitle>Autobús</mat-card-subtitle>
+                    }  @else{
+                        <mat-card-subtitle>Coche</mat-card-subtitle>
+                    }                 
+                </mat-card-title-group> 
+                @if(item.puntuacion > 0){
+                    <span class="points">+{{item.puntuacion}}p</span> 
+                } @else{
+                    <span class="points">{{item.puntuacion}}p</span> 
+                }        
+                </mat-card-header>
+            </mat-card>
+        }
+    </div>
+</div>
