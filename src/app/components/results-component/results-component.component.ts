@@ -18,6 +18,7 @@ import { EmtServiceService } from '../../services/emt-service.service';
 import { ValenciaServiceService } from '../../services/valencia-service.service';
 
 import * as L from 'leaflet';
+(window as any).L = L;
 import 'leaflet.markercluster';
 
 @Component({
