@@ -8,7 +8,15 @@
         <mat-card-header>
             <mat-card-title-group>
                 <mat-card-title>{{time}} minutos</mat-card-title>
-                <mat-card-subtitle>A pie</mat-card-subtitle>
+                @if(tipo == 2){
+                    <mat-card-subtitle>Bicicleta</mat-card-subtitle>
+                }
+                @if(tipo == 3){
+                    <mat-card-subtitle>Autobús</mat-card-subtitle>
+                }
+                @if(tipo == 4){
+                    <mat-card-subtitle>Coche</mat-card-subtitle>
+                }
             </mat-card-title-group> 
             @if(puntos < 0){
                 <span class="points">{{puntos}}p</span> 
@@ -19,8 +27,8 @@
     </mat-card>
     <div class="submit_pc">
         @if(tipo == 2 || tipo == 3){
-            <p><strong>Tiempo total: </strong>{{time}}</p>
-            <p><strong>Distancia total: </strong>{{distance}}</p>
+            <p><strong>Tiempo total: </strong>{{time}} minutos</p>
+            <p><strong>Distancia total: </strong>{{distance}} km.</p>
             <p><strong>CO2: </strong>{{co2}}</p>
         }
     </div>
@@ -132,8 +140,8 @@
 </div>
 <div id="submit">
     @if(tipo == 2 || tipo == 3){
-        <p><strong>Tiempo total: </strong>{{time}}</p>
-        <p><strong>Distancia total: </strong>{{distance}}</p>
+        <p><strong>Tiempo total: </strong>{{time}} minutos</p>
+        <p><strong>Distancia total: </strong>{{distance}} km.</p>
         <p><strong>CO2: </strong>{{co2}}</p>
     }
     <button mat-raised-button color="primary" (click)="saveRuta();">Realizar</button>
