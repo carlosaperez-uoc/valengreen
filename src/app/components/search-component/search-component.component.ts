@@ -46,6 +46,7 @@ export class SearchComponentComponent implements AfterViewInit {
   private map!: L.Map;
   private markerOrigen: L.Marker | null = null;
   private markerDestino: L.Marker | null = null;
+  private markerUbicacion: L.CircleMarker | null = null;
 
   resultadosOrigen: any[] = [];
   resultadosDestino: any[] = [];
@@ -67,6 +68,7 @@ export class SearchComponentComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.loadMap();
     this.getAparcamientos();
+    this.cargarUbicacionActual();
   }
 
   private loadMap(): void{
@@ -166,6 +168,34 @@ export class SearchComponentComponent implements AfterViewInit {
     }
   
     this.map.setView(coords, 15);
+  }
+
+  cargarUbicacionActual() {
+    if (!navigator.geolocation) return;
+  
+    navigator.geolocation.getCurrentPosition((position) => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+  
+      const coordString = `${lat}, ${lng}`;
+  
+      this.origenString = coordString;
+  
+      this.origen.setValue('Tu ubicación', { emitEvent: false });
+  
+      if (this.markerUbicacion) {
+        this.map.removeLayer(this.markerUbicacion);
+      }
+  
+      this.markerUbicacion = L.circleMarker([lat, lng], {
+        radius: 8,
+        color: '#2196f3',
+        fillColor: '#2196f3',
+        fillOpacity: 0.8
+      }).addTo(this.map);
+  
+      this.map.setView([lat, lng], 15);
+    });
   }
 
   getTemp(){
